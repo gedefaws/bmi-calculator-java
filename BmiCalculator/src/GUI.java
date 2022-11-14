@@ -57,8 +57,6 @@ public class GUI implements ActionListener {
         frame.setVisible(true);
     }
 
-
-
     @Override
     public void actionPerformed(ActionEvent e) {
         // TODO Auto-generated method stub
@@ -67,7 +65,6 @@ public class GUI implements ActionListener {
         summaryLabel.setText("your BMI is " + TWO_DECIMAL_PLACES.format(res) + ", your category is " + cat);
         submitButton.setVisible(false);
 
-        
     }
 
     public static double calculate() {
@@ -80,7 +77,6 @@ public class GUI implements ActionListener {
 		
 	}
 
-	
 	// THE BMI CATEGORIES
 	public static String getCategory (double result) {
 		String category;

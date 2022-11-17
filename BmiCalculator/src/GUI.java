@@ -15,6 +15,8 @@ public class GUI implements ActionListener {
     public static JLabel summaryLabel;
     public static JTextField weighTextField;
     public static JTextField highTextField;
+    public static JButton imperialButton;
+
 
     final static double KG_TO_LBS = 2.20462;
 	final static double M_TO_IN = 39.3701;
@@ -54,18 +56,53 @@ public class GUI implements ActionListener {
         summaryLabel = new JLabel();
         summaryLabel.setBounds(10, 80, 500, 20);
         panel.add(summaryLabel);
+
+        imperialButton = new JButton("Imperial");
+        imperialButton.setBounds(200, 60, 100, 20);
+        panel.add(imperialButton);
+        imperialButton.addActionListener(new GUI());
+
+
         frame.setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO Auto-generated method stub
-        double res = calculate();
-        String cat = getCategory(res);
-        summaryLabel.setText("your BMI is " + TWO_DECIMAL_PLACES.format(res) + ", your category is " + cat);
-        submitButton.setVisible(false);
+        submitButtonListener();
+        imperialButtonListener();
 
     }
+    
+
+    public void submitButtonListener(){
+        
+        ActionListener buttonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                double res = calculate();
+                String cat = getCategory(res);
+                summaryLabel.setText("your BMI is " + TWO_DECIMAL_PLACES.format(res) + ", your category is " + cat);
+                submitButton.setEnabled(false);
+            }
+        };
+
+        submitButton.addActionListener(buttonListener);   
+    }
+
+    public void imperialButtonListener(){
+        
+        ActionListener buttonListener1 = new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e){
+                double res = calculate();
+                String cat = getCategory(res);
+                    summaryLabel.setText("your BMI is " + TWO_DECIMAL_PLACES.format(res * 2.2) + ", your category is " + cat);  
+            }
+        };
+        imperialButton.addActionListener(buttonListener1);   
+    }
+
 
     public static double calculate() {
 		double height, weight;
